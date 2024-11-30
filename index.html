@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>السيارات</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+    <style>
+      /* استايلات عامة */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Cairo", sans-serif;
+        color: #02732a;
+      }
+      body,
+      html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      body {
+        background-color: #f8f8f8;
+        padding-bottom: 30px;
+        direction: rtl;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+
+      a:hover {
+        color: white;
+        text-decoration: none;
+      }
+
+      /* شريط ناف بار وهمي */
+      .navbar {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #02732a;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar .logo {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .navbar .menu-icon {
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+      }
+
+      /* تحسين العناوين */
+      .title h2 {
+        text-align: center;
+        margin: 20px 0;
+        padding: 10px;
+        font-size: 2vw;
+        line-height: 1.5;
+        font-weight: bold;
+        text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* تحسين الصور */
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        background-size: cover;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .image-container img:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* تحسين الأزرار */
+      .center-btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 20px 0;
+      }
+
+      .button {
+        background: linear-gradient(to right, #02732a, #045d1e);
+        color: white;
+        width: 100%;
+        max-width: 186px;
+        height: 3.5rem;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+        font-size: 1rem;
+        font-weight: 500;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .button:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(to right, #045d1e, #02732a);
+      }
+
+      /* شريط الأخبار */
+      .news-ticker-container {
+        width: 100%;
+        overflow: hidden;
+        background-color: #f8f8f8;
+        padding: 10px 0;
+        border-top: 1px solid #ccc;
+      }
+
+      .news-ticker {
+        display: flex;
+        width: 300%; /* عرض أكبر من اللازم، يتم التحكم به */
+        animation: scrollNews 10s linear infinite;
+      }
+
+      .ticker-item {
+        flex: 1 0 auto;
+        min-width: 33.33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ticker-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .ticker-item img:hover {
+        transform: scale(1.05);
+      }
+
+      @keyframes scrollNews {
+        from {
+          transform: translateX(0%);
+        }
+
+        to {
+          transform: translateX(-100%);
+        }
+      }
+
+      /* تحسين التجاوب */
+      @media (max-width: 768px) {
+        .title h2 {
+          font-size: 4vw;
+        }
+
+        .button {
+          font-size: 0.9rem;
+          max-width: 150px;
+          height: 3rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .title h2 {
+          font-size: 5vw;
+        }
+
+        .button {
+          font-size: 0.8rem;
+          max-width: 120px;
+          height: 2.8rem;
+        }
+      }
+
+      .ticker-container {
+        width: 100%;
+        background-color: #f0f0f0; /* لون الخلفية */
+        overflow: hidden;
+        height: 200px; /* نفس ارتفاع الصور */
+        display: flex;
+        align-items: center;
+      }
+
+      /* الشريط المتحرك */
+      .ticker {
+        display: flex;
+        animation: scroll 10s linear infinite; /* الحركة */
+      }
+
+      /* عنصر الصور */
+      .ticker-item {
+        flex: 0 0 auto;
+        margin: 0 10px;
+      }
+
+      .ticker-item img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover; /* لضبط الصورة داخل الحجم */
+      }
+
+      /* حركة الشريط */
+      @keyframes scroll {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- شريط ناف بار وهمي -->
+    <div class="navbar">
+      <div class="logo">تأمين المركبات</div>
+      <div class="menu-icon">☰</div>
+    </div>
+
+    <div class="container">
+      <!-- القسم الأول -->
+      <div data-aos="fade-up">
+        <div class="title">
+          <h2>
+            حجز مواعيد الفحص الفني الدوري للمركبات في المراكز المعتمدة في
+            المملكة العربية السعودية
+          </h2>
+        </div>
+        <div class="image-container">
+          <img src="./images/1.jpeg" alt="شركات التأمين" />
+        </div>
+        <div class="center-btn-container">
+          <button class="button">
+            <a href="https://www.google.com/">متابعه</a>
+          </button>
+        </div>
+      </div>
+
+      <!-- القسم الثاني -->
+      <div data-aos="fade-right">
+        <div class="title">
+          <h2>
+            إدارة مواعيد الفحص الفني الدوري للمركبات لدى جميع الجهات المرخصة من
+            المواصفات السعودية لتقديم الخدمة
+          </h2>
+        </div>
+        <div class="image-container">
+          <img src="./images/2.jpeg" alt="أفضل منصة" />
+        </div>
+        <div class="center-btn-container">
+          <button class="button">
+            <a href="https://www.google.com/">متابعه</a>
+          </button>
+        </div>
+      </div>
+
+      <!-- القسم الثالث -->
+      <div data-aos="fade-left">
+        <div class="title">
+          <h2>
+            مراكز ومحطات نموذجية تحدث نقلة نوعية في خدمات الفحص الفني الدوري
+            للمركبات وتحسين البنية التحتية عبر توظيف أحدث المعدات بأعلى معايير
+            الجودة والدقة
+          </h2>
+        </div>
+        <div class="image-container">
+          <img src="./images/3.jpeg" alt="المركبات المستعملة" />
+        </div>
+        <div class="center-btn-container">
+          <button class="button">
+            <a href="https://www.google.com/">متابعه</a>
+          </button>
+        </div>
+      </div>
+
+      <!-- القسم الرابع -->
+      <div data-aos="zoom-in">
+        <div class="title">
+          <h2>تفاصيل الفحص الفني الدوري لمركبتك عبر خدمة الفحص الفني الدوري</h2>
+        </div>
+        <div class="image-container">
+          <img src="./images/4.jpeg" alt="المركبات المستعملة" />
+        </div>
+        <div class="center-btn-container">
+          <button class="button">
+            <a href="https://www.google.com/">متابعه</a>
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div class="ticker-container">
+      <div class="ticker">
+        <div class="ticker-item">
+          <img src="./images/5.jpeg" alt="شركات التأمين" />
+        </div>
+        <div class="ticker-item">
+          <img src="./images/6.jpeg" alt="شركات التأمين" />
+        </div>
+        <div class="ticker-item">
+          <img src="./images/7.jpeg" alt="شركات التأمين" />
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1200, // مدة الأنيميشن
+      });
+
+      const ticker = document.querySelector('.ticker');
+
+// نسخ العناصر لتكرارها
+const items = ticker.innerHTML;
+ticker.innerHTML += items;
+
+    </script>
+  </body>
+</html>
